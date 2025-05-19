@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import Link from 'next/link';
-import Text from '@/components/text';
+import Text from '@/components/ui/text';
 import RegisterForm from './register-form';
 
 const Register = () => {

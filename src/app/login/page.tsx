@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 import LoginForm from './login-form';
-import Text from '@/components/text';
+import Text from '@/components/ui/text';
 
 const Login = () => {
   return (
