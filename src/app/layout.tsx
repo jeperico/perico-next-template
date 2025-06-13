@@ -3,6 +3,7 @@
 import React from 'react';
 import { Suspense } from 'react';
 import '@/styles/global.css';
+import Providers from '@/context/providers';
 
 export default function RootLayout({
   children,
@@ -20,7 +21,7 @@ export default function RootLayout({
             </div>
           }
         >
-          {children}
+          <Providers>{children}</Providers>
         </Suspense>
       </body>
     </html>
