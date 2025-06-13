@@ -6,8 +6,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        black: '#000',
+        white: '#000',
       },
       borderRadius: {
         lg: 'var(--radius)',
