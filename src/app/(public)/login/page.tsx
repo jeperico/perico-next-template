@@ -12,9 +12,9 @@ const Login = () => {
         <CardHeader className="flex flex-col items-center">
           <CardTitle className="text-2xl font-bold text-center mb-4">
             <Image
-              src="/logo/overmaq-logo.png"
+              src="/logo/logo.png"
               className="h-full w-36"
-              alt="Logo da Overmaq"
+              alt="Logo"
               width={144}
               height={48}
             />

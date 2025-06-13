@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button';
 import doLogin from '@/services/auth/doLogin';
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-// import { toast } from 'sonner';
+import { toast } from 'sonner';
 // TO DO - Toast is deprecated now
 
 const loginFormSchema = z.object({
@@ -50,63 +50,63 @@ const LoginForm = () => {
       form.setValue('password', '');
       form.setFocus('password');
 
-      // toast.warning('Erro de autenticação', {
-      //   description: () => (
-      //     <p className="text-zinc-400">Email ou senha inválidos</p>
-      //   ),
-      //   position: 'bottom-center',
-      //   duration: 5000,
-      //   action: {
-      //     label: 'Fechar',
-      //     onClick: () => {
-      //       toast.dismiss();
-      //     },
-      //   },
-      // });
+      toast.warning('Erro de autenticação', {
+        description: () => (
+          <p className="text-zinc-400">Email ou senha inválidos</p>
+        ),
+        position: 'bottom-center',
+        duration: 5000,
+        action: {
+          label: 'Fechar',
+          onClick: () => {
+            toast.dismiss();
+          },
+        },
+      });
     } else if (status === 500) {
       form.setError('password', {
         type: 'manual',
         message: 'Erro interno do servidor',
       });
 
-      // toast.warning('Erro interno', {
-      //   description: () => (
-      //     <p className="text-zinc-400">Erro ao tentar conectar ao servidor</p>
-      //   ),
-      //   position: 'bottom-center',
-      //   duration: 5000,
-      //   action: {
-      //     label: 'Fechar',
-      //     onClick: () => {
-      //       toast.dismiss();
-      //     },
-      //   },
-      // });
+      toast.warning('Erro interno', {
+        description: () => (
+          <p className="text-zinc-400">Erro ao tentar conectar ao servidor</p>
+        ),
+        position: 'bottom-center',
+        duration: 5000,
+        action: {
+          label: 'Fechar',
+          onClick: () => {
+            toast.dismiss();
+          },
+        },
+      });
     } else if (status === 200) {
-      // toast.success('Usuário logado com sucesso!', {
-      //   duration: 5000,
-      //   action: {
-      //     label: 'Fechar',
-      //     onClick: () => {
-      //       toast.dismiss();
-      //     },
-      //   },
-      // });
+      toast.success('Usuário logado com sucesso!', {
+        duration: 5000,
+        action: {
+          label: 'Fechar',
+          onClick: () => {
+            toast.dismiss();
+          },
+        },
+      });
     } else {
       form.setError('password', {
         type: 'manual',
         message: 'Erro desconhecido',
       });
-      // toast.warning('Erro desconhecido', {
-      //   position: 'bottom-center',
-      //   duration: 5000,
-      //   action: {
-      //     label: 'Fechar',
-      //     onClick: () => {
-      //       toast.dismiss();
-      //     },
-      //   },
-      // });
+      toast.warning('Erro desconhecido', {
+        position: 'bottom-center',
+        duration: 5000,
+        action: {
+          label: 'Fechar',
+          onClick: () => {
+            toast.dismiss();
+          },
+        },
+      });
     }
   };
 
