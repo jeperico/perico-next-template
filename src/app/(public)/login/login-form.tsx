@@ -19,7 +19,6 @@ import doLogin from '@/services/auth/doLogin';
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { toast } from 'sonner';
-// TO DO - Toast is deprecated now
 
 const loginFormSchema = z.object({
   email: z.string().email('Email inválido').nonempty('Email é obrigatório'),
