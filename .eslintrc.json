@@ -9,5 +9,10 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {}
 }

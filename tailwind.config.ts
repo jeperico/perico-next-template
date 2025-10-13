@@ -2,12 +2,12 @@ import type { Config } from 'tailwindcss';
 
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: ['class'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        black: '#000',
+        white: '#000',
       },
       borderRadius: {
         lg: 'var(--radius)',

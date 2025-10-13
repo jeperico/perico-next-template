@@ -1,20 +1,19 @@
-import axios from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import api from './axiosInstance';
 import getHeaders from './getHeaders';
 
 export interface IHttpRequestParams {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extraHeaders?: any;
-  showToastOnGenericErrorOnly?: boolean;
-  overwriteEndpoint?: string;
-  enableRequestThrottle?: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  axiosConfig?: Omit<any, 'headers' | 'method' | 'data' | 'cancelToken'>;
+  extraHeaders?: Record<string, string>;
+
+  axiosConfig?: Omit<
+    AxiosRequestConfig,
+    'headers' | 'method' | 'data' | 'cancelToken'
+  >;
 }
 
 export interface IPostRequestParams extends IHttpRequestParams {
-  body?: object | string;
-  image?: string;
-  status?: string;
+  body?: Record<string, unknown> | string | FormData;
+  // TODO: Config multipart/form-data
 }
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -26,34 +25,34 @@ const httpRequest = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> => {
   const headers = getHeaders(props);
+  const endpoint = `${process.env.NEXT_PUBLIC_BASE_API_URL}/${uri}/`;
 
-  const endpoint = `${process.env.NEXT_PUBLIC_BASE_API_URL}/${uri}`;
-
-  const body = props.body ? { data: props.body } : {};
+  const isFormData = props.body instanceof FormData;
+  const dataPayload = isFormData
+    ? props.body
+    : props.body
+      ? typeof props.body === 'string'
+        ? JSON.parse(props.body)
+        : props.body
+      : undefined;
 
   const params = {
     url: endpoint,
+    withCredentials: true,
     ...(props.axiosConfig || {}),
-    ...body,
+    ...(dataPayload !== undefined && { data: dataPayload }),
     headers,
     method,
   };
 
-  try {
-    const response = await axios(params);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return await api(params);
 };
 
 export const get = (uri: string, params?: IHttpRequestParams) =>
   httpRequest(uri, 'GET', params);
 
-export const post = (uri: string, params?: IPostRequestParams) => {
-  return httpRequest(uri, 'POST', params);
-};
+export const post = (uri: string, params?: IPostRequestParams) =>
+  httpRequest(uri, 'POST', params);
 
 export const put = (uri: string, params?: IPostRequestParams) =>
   httpRequest(uri, 'PUT', params);
@@ -61,5 +60,5 @@ export const put = (uri: string, params?: IPostRequestParams) =>
 export const patch = (uri: string, params?: IPostRequestParams) =>
   httpRequest(uri, 'PATCH', params);
 
-export const del = (uri: string, props?: IHttpRequestParams) =>
-  httpRequest(uri, 'DELETE', props);
+export const del = (uri: string, params?: IHttpRequestParams) =>
+  httpRequest(uri, 'DELETE', params);
