@@ -6,7 +6,7 @@ const publicRoutes = [
   { path: '/', whenAuthenticated: 'next' },
 ];
 
-export const middleware = (request: NextRequest) => {
+export const proxy = (request: NextRequest) => {
   const path = request.nextUrl.pathname;
   const publicRoute = publicRoutes.find((route) => route.path === path);
   const authToken = request.cookies.get('access_token');
