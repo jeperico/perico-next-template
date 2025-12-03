@@ -4,6 +4,7 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from 'axios';
+
 import { post } from './api';
 
 const api: AxiosInstance = axios.create({

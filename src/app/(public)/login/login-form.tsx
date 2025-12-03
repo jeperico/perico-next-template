@@ -1,10 +1,14 @@
 'use client';
 
-import React from 'react';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,11 +18,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import doLogin from '@/services/auth/doLogin';
-import { useRouter } from 'next/navigation';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { toast } from 'sonner';
 
 const loginFormSchema = z.object({
   email: z.string().email('Email inválido').nonempty('Email é obrigatório'),

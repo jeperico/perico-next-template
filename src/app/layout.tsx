@@ -1,8 +1,10 @@
 'use client';
 
+import '@/styles/global.css';
+
 import React from 'react';
 import { Suspense } from 'react';
-import '@/styles/global.css';
+
 import Providers from '@/context/providers';
 
 export default function RootLayout({

@@ -1,7 +1,8 @@
+import axios from 'axios';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+
 import { LoginFormSchema } from '@/app/(public)/login/login-form';
 import { post } from '@/providers/api';
-import axios from 'axios';
 
 const doLogin = async (
   data: LoginFormSchema,

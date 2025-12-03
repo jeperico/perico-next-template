@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
 import { usePathname } from 'next/navigation';
-import Header from '@/layout/header';
-import Footer from '@/layout/footer';
+import React from 'react';
+
 import { Toaster } from '@/components/ui/sonner';
+import Footer from '@/layout/footer';
+import Header from '@/layout/header';
 
 interface IProvidersProps {
   children: React.ReactNode;
