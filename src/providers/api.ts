@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
+
 import api from './axiosInstance';
-import getHeaders from './getHeaders';
 
 export interface IHttpRequestParams {
   extraHeaders?: Record<string, string>;
@@ -12,11 +12,12 @@ export interface IHttpRequestParams {
 }
 
 export interface IPostRequestParams extends IHttpRequestParams {
-  body?: Record<string, unknown> | string | FormData;
-  // TODO: Config multipart/form-data
+  body?: object | string;
+  image?: string;
+  status?: string;
 }
 
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 const httpRequest = async (
   uri: string,
@@ -24,7 +25,10 @@ const httpRequest = async (
   props: IPostRequestParams = {}
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> => {
-  const headers = getHeaders(props);
+  const headers = {
+    'Content-type': 'application/json',
+    ...props.extraHeaders,
+  };
   const endpoint = `${process.env.NEXT_PUBLIC_BASE_API_URL}/${uri}/`;
 
   const isFormData = props.body instanceof FormData;
